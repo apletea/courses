@@ -1,5 +1,6 @@
 package repository;
 
+import config.Config;
 import domain.Session;
 import domain.Timetable;
 
@@ -13,7 +14,7 @@ import java.util.Scanner;
 public class TimetableDAO {
 
     public static Timetable getTimetable() throws FileNotFoundException{
-        Scanner sc = new Scanner(new File("timetable.txt"));
+        Scanner sc = new Scanner(new File(Config.TIMETABLE));
         Timetable timetable = new Timetable();
         while (sc.hasNext()){
             String str = sc.next();

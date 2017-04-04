@@ -1,6 +1,7 @@
 package repository;
 
 
+import config.Config;
 import domain.Session;
 
 import java.io.File;
@@ -14,7 +15,7 @@ public class SessionDAO {
 
 
         public String getInfo(long id) throws FileNotFoundException{
-            Scanner sc = new Scanner(new File("timetable.txt"));
+            Scanner sc = new Scanner(new File(Config.TIMETABLE));
             while (sc.hasNext()){
                 Session currentSession = new Session(sc.next());
                 if (currentSession.id == id)

@@ -28,7 +28,7 @@ public class Timetable {
     @Override
     public String toString() {
         return "Timetable : {" +
-                "timetable :" + timetable +
+                "timetable :" + timetable.toString() +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package repository;
 
+import config.Config;
 import domain.Booking;
 
 import java.io.*;
@@ -10,8 +11,10 @@ import java.util.Scanner;
  */
 public class BookingDAO {
 
+
+
     public void cancel(long id) throws IOException {
-        File inputFile = new File("booking.txt");
+        File inputFile = new File(Config.BOOKING);
         File tempFile = new File("myTempFile.txt");
 
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -32,7 +35,7 @@ public class BookingDAO {
     }
 
     public String getInfo(long id) throws FileNotFoundException{
-        Scanner sc = new Scanner(new File("booking.txt"));
+        Scanner sc = new Scanner(new File(Config.BOOKING));
         String booking ="";
         String session = "";
         while (sc.hasNext()){
@@ -48,7 +51,15 @@ public class BookingDAO {
         return booking+session;
     }
 
-    public String bookPlace(long session_id, int place){
-
+    public String bookPlace(long session_id, int place) throws FileNotFoundException, IOException{
+        Scanner sc = new Scanner(new File(Config.BOOKING));
+        while (sc.hasNext()){
+            Booking currentBook = new Booking(sc.next());
+            if (currentBook.sessionId == session_id && currentBook.place == place)
+                return "{status:400, place : "+place+"}";
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(Config.BOOKING));
+        Booking booking = new Booking(session_id,place);
+        return "{"+booking.toString() + "}";
     }
 }

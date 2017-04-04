@@ -47,4 +47,8 @@ public class BookingDAO {
         sc.close();
         return booking+session;
     }
+
+    public String bookPlace(long session_id, int place){
+
+    }
 }

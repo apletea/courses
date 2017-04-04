@@ -1,13 +1,10 @@
 package controllers;
 
-import domain.Booking;
 import domain.Timetable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repository.BookingDAO;
-import repository.BookingDAO.*;
-import repository.SessionDAO.*;
 import repository.TimetableDAO;
 
 import java.util.List;
@@ -65,10 +62,12 @@ public class Controller {
         try{
             if (session_id < 0)
                 return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            BookingDAO bookingDAO = new BookingDAO();
+            String ans = "";
             for (int place: places) {
-              BookingDAO.bookPlace(session_id,place);
+                ans += bookingDAO.bookPlace(session_id,place);
             }
-            return new ResponseEntity<String>(HttpStatus.OK);
+            return new ResponseEntity<String>(ans,HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

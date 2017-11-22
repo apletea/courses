@@ -1,0 +1,5 @@
+bin   this directory contains essential user command binaries (for use by all users)
+boot  this directory contains everything required for the boot procces 
+cdrom this directory is empty
+dev   this directory contains device files
+etc   this directory contains host-specific system configuration
